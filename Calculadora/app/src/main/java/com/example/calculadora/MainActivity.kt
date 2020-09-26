@@ -3,6 +3,7 @@ package com.example.calculadora
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 
@@ -12,8 +13,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var  etNumero1: EditText
     private lateinit var  etNumero2: EditText
     private lateinit var  btnSumar: Button
+    private val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i(TAG, "onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -63,6 +66,33 @@ class MainActivity : AppCompatActivity() {
     private fun sumarInLine(numero1: Int, numero2: Int): Int = numero1 + numero2
     private fun sumarConCuerpo(numero1: Int, numero2: Int): Int {
         return  numero1 + numero2
+    }
+
+
+    //Ciclo de Vida de la aplicación
+    override fun onStart() {
+        super.onStart()
+        Log.i(TAG, "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i(TAG, "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i(TAG, "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i(TAG, "onStop")
+    }
+
+    override fun onDestroy() {
+        Log.i(TAG, "onDestroy")
+        super.onDestroy()
     }
 
     val a =1
