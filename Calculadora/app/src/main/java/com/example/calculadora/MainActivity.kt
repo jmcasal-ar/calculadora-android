@@ -1,16 +1,16 @@
 package com.example.calculadora
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
+
 
 class MainActivity : AppCompatActivity() {
     /*Aca declaramos las variables del layout*/
     private lateinit var  etNumero1: EditText
-    private lateinit var  txtResultado: TextView
+    private lateinit var  etNumero2: EditText
     private lateinit var  btnSumar: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     fun setupUI() {
         /*Asi asignamos una vista que es nuestra id a un objeto, como por ej ejemplo un textoview*/
         etNumero1 = findViewById(R.id.etNumero1)
-        txtResultado = findViewById(R.id.txtResultado)
+        etNumero2 = findViewById(R.id.etNumero2)
         btnSumar = findViewById(R.id.btnSumar)
 
         btnSumar.setOnClickListener {
@@ -37,12 +37,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun realizarSuma() {
+        /*ACA EL PROFE LO DEJO MEDIO DESPROLIJO*/
         val numero1 = etNumero1.text.toString().toInt()
-        val resultado = txtResultado.text.toString().toInt()
+        val numero2 = etNumero2.text.toString().toInt()
         
-        var resultadoSuma = sumar(numero1, resultado)
+        var resultadoSuma = sumar(numero1, numero2)
 
-        txtResultado.text = resultadoSuma.toString()
+        lanzarResultadoActivity(resultadoSuma)
+        
+
+
+    }
+
+    private fun lanzarResultadoActivity(resultado: Int) {
+        //Ir hacia otra activity
+        val intent = Intent(this, ResultadoActivity::class.java)
+        //metodo para enviar parametros
+        intent.putExtra("RESULTADO", resultado)
+        //Metodo para comenzar la Activity
+        startActivity(intent)
     }
 
     /*Distintas formas de escribir la función sumar*/
